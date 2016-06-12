@@ -1,0 +1,8 @@
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\bin\Debug\Server.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\bin\Debug\Server.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\bin\Debug\Common.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\bin\Debug\Common.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\obj\Debug\Server.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\obj\Debug\Server.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\Server\bin\Debug\MySql.Data.dll

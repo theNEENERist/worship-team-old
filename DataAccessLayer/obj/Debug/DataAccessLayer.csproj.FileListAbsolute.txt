@@ -1,0 +1,5 @@
+C:\Users\joelb\OneDrive\Documents\ccmusic\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\joelb\OneDrive\Documents\ccmusic\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

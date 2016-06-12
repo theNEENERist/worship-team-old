@@ -1,0 +1,5 @@
+C:\Users\joelb\OneDrive\Documents\ccmusic\Common\bin\Release\Common.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\Common\bin\Release\Common.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\Common\obj\Release\Common.csprojResolveAssemblyReference.cache
+C:\Users\joelb\OneDrive\Documents\ccmusic\Common\obj\Release\Common.dll
+C:\Users\joelb\OneDrive\Documents\ccmusic\Common\obj\Release\Common.pdb

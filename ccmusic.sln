@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccmusic", "ccmusic\ccmusic.csproj", "{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hosts", "hosts", "{2B812A9F-80CC-4A7D-8615-34CE9A2BEF54}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{26DFCBFF-07ED-46FA-9451-AFEAAB967049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{006119DA-B4C4-4340-B14C-42856D7E67A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{00E5E364-58A0-4D29-A476-4102C4A2AB93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006119DA-B4C4-4340-B14C-42856D7E67A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006119DA-B4C4-4340-B14C-42856D7E67A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006119DA-B4C4-4340-B14C-42856D7E67A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006119DA-B4C4-4340-B14C-42856D7E67A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E5E364-58A0-4D29-A476-4102C4A2AB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E5E364-58A0-4D29-A476-4102C4A2AB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E5E364-58A0-4D29-A476-4102C4A2AB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E5E364-58A0-4D29-A476-4102C4A2AB93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E03BEAD1-A283-4ACB-B5BD-97E57F8B26E1} = {2B812A9F-80CC-4A7D-8615-34CE9A2BEF54}
+		{006119DA-B4C4-4340-B14C-42856D7E67A8} = {26DFCBFF-07ED-46FA-9451-AFEAAB967049}
+		{00E5E364-58A0-4D29-A476-4102C4A2AB93} = {26DFCBFF-07ED-46FA-9451-AFEAAB967049}
+	EndGlobalSection
+EndGlobal

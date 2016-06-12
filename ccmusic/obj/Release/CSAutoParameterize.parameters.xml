@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ccmusicconn-Web.config Connection String" description="ccmusicconn Connection String used in web.config by the application to access the database." defaultValue="Data Source=198.71.225.145;Integrated Security=False;User ID=jleach;Database=ccmusic;Uid=jleach;Pwd=2Mkox72!" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\joelb\\OneDrive\\Documents\\ccmusic\\ccmusic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ccmusicconn']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-ccmusic-20160526092729.mdf;Initial Catalog=aspnet-ccmusic-20160526092729;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\joelb\\OneDrive\\Documents\\ccmusic\\ccmusic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
