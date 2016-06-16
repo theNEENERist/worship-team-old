@@ -34,6 +34,10 @@ namespace ccmusic
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datetime").Include(
+                    "~/Scripts/moment*",
+                    "~/Scripts/bootstrap-datetimepicker*"));
+
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition
