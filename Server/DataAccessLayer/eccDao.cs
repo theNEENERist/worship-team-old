@@ -20,29 +20,6 @@ namespace Server.DataAccessLayer
 
             try
             {
-                /*using (OdbcConnection con = new OdbcConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
-                using (OdbcCommand command = con.CreateCommand())
-                {
-                    command.CommandText = "{call GetAllFileNames()}";
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    DataTable dataTable = new DataTable();
-
-                    con.Open();
-
-                    using (OdbcDataAdapter adapter = new OdbcDataAdapter(command))
-                    {
-                        adapter.Fill(dataTable);
-                    }
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        songList.Add(new SongDto() { Name = row["name"].ToString() });
-                    }
-
-                    con.Close();              
-                }*/
-
                 using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
                 {
                     con.Open();
@@ -71,7 +48,7 @@ namespace Server.DataAccessLayer
 
         public List<SongDto> GetECCFilesForSong(string songName)
         {
-            List<SongDto> songList = new List<SongDto>();
+            var songList = new List<SongDto>();
 
             try
             {
@@ -99,31 +76,6 @@ namespace Server.DataAccessLayer
                         });
                     }
                 }
-                /*using (OdbcCommand command = con.CreateCommand())
-                {
-                    command.CommandText = "{call GetFilesForName('" + songName + "')}";
-                    command.Parameters.AddWithValue("@name", songName);
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    DataTable dataTable = new DataTable();
-
-                    con.Open();
-
-                    using (OdbcDataAdapter adapter = new OdbcDataAdapter(command))
-                    {
-                        adapter.Fill(dataTable);
-                    }
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        songList.Add(new SongDto()
-                            {
-                                Name = row["name"].ToString(),
-                                Path = row["path"].ToString()
-                            });
-                    }
-                    con.Close();
-                }*/
             }
             catch (Exception ex)
             {
@@ -150,18 +102,6 @@ namespace Server.DataAccessLayer
                         sqlComm.Parameters.AddWithValue("@FilePath", "MusicSheets/Lyrics/" + withExtension);
                     sqlComm.Parameters.AddWithValue("@FileTYpe", fileType);
 
-
-                    /*using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
-                    {
-                        connection.Open();
-                        using (OdbcCommand command = new OdbcCommand("insert into `musicFiles` values('" + fileName + "', 'MusicSheets/" + withExtension + "','1')", connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-                        connection.Close();
-                    }*/
-                    //}
-
                     sqlComm.ExecuteNonQuery();
                     con.Close();
                 }
@@ -169,7 +109,43 @@ namespace Server.DataAccessLayer
             catch (Exception ex)
             {
             }
-            
+        }
+
+        public List<SongDto> GetSongsByUse(DateTime usedDate)
+        {
+            var songList = new List<SongDto>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
+                {
+                    con.Open();
+
+                    DataSet ds = new DataSet();
+                    SqlCommand sqlComm = new SqlCommand("GetSongsByDate", con);
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    sqlComm.Parameters.AddWithValue("@LastUsedDate", usedDate.ToShortDateString());
+
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = sqlComm;
+
+                    da.Fill(ds);
+
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        songList.Add(new SongDto()
+                        {
+                            Name = dr["SongName"].ToString(),
+                            DateUsed = dr["DateUsed"].ToString()
+                        });
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return songList;
         }
     }
 }

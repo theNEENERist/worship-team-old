@@ -93,3 +93,4 @@ C:\Users\joelb\OneDrive\Documents\ccmusic\ccmusic\bin\Microsoft.Owin.Security.OA
 C:\Users\joelb\OneDrive\Documents\ccmusic\ccmusic\obj\Debug\ccmusic.csprojResolveAssemblyReference.cache
 C:\Users\joelb\OneDrive\Documents\ccmusic\ccmusic\obj\Debug\ccmusic.dll
 C:\Users\joelb\OneDrive\Documents\ccmusic\ccmusic\obj\Debug\ccmusic.pdb
+C:\Users\joelb\OneDrive\Documents\ccmusic\ccmusic\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll

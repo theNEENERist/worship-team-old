@@ -6,16 +6,56 @@
         <p class="lead"></p>
     </div>
     <div style="margin-bottom: 5px;">
-        <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-          <input class="span2" runat="server" id="dateTextBox" size="16" type="text" value="12-02-2012">
-          <span class="add-on"><i class="icon-th"></i></span>
+        <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
+            <asp:panel runat="server">
+                <div id="newSong">
+                    <input class="span2" runat="server" id="dateTextBox" size="16" type="text">
+                    <input class="songsUsed" size="80" type="text">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                    <div runat="server" class="songTxts" />
+                    <input type="button" onclick="AddSongTxt();" value="Add Another Song">
+                    <asp:Button runat="server" Text="Submit" OnClick="SubmitSongs" />
+                </div>
+
+                <div id="pastSongs">
+                    <asp:Button runat="server" Text="Submit" OnClick="GetSongsByDate" />
+                </div>
+            </asp:panel>
         </div>
     </div>
     <div style="margin-bottom: 5px;">
         <asp:Label Text="Song Name: " runat="server" />
         <asp:TextBox ID="fileName" runat="server" />
     </div>
+    <div class="row" id="songListContainer" runat="server">
+    </div>
     <script type="text/javascript">
+        var songs = $.parseJSON('<%= songsJson %>');
+
+        $(function () {
+            $('.songsUsed').each( function() {
+                $(this).autocomplete({
+                    source: songs
+                });
+            });
+        });
+
+       function AddSongTxt() {
+
+           var newItem = $("<input type='text' class='songsUsed' size='80' />");
+           //var newItem = $("<input type='text' name='td_products[" + counter + "]' />");
+
+
+           $(".songTxts").append(newItem);
+
+           $('.songsUsed').each(function () {
+               $(this).autocomplete({
+                   source: songs
+               });
+           });
+
+           //newItem.find('input').autocomplete({source: songs});
+       }
         /*var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
@@ -45,12 +85,13 @@
         dp.datepicker({
             changeMonth: true,
             changeYear: true,
-            format: "dd.mm.yyyy",
+            format: "dd-mm-yyyy",
             language: "tr"
         }).on('changeDate', function (ev) {
             $(this).blur();
             $(this).datepicker('hide');
         });
+        dp.datepicker('setDate', new Date());
 });
     </script>
 </asp:Content>

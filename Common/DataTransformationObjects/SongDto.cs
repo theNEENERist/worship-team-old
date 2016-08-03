@@ -18,6 +18,9 @@ namespace Common.DataTransformationObjects
         public string FileType
         { get; set; }
 
+        public string DateUsed
+        { get; set; }
+
         public static explicit operator SongDto(List<DataRow> v)
         {
             throw new NotImplementedException();

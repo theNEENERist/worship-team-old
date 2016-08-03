@@ -16,6 +16,7 @@ namespace ccmusic.Controllers
         public List<SongDto> GetECCFiles()
         {
             return eccManager.GetECCFiles();
+
         }
 
         public List<SongDto> GetEccFilesForSong(string songName)
@@ -26,6 +27,11 @@ namespace ccmusic.Controllers
         public void UploadSong(string fileName, string withExtension, string fileType)
         {
             eccManager.UploadSong(fileName, withExtension, fileType);
+        }
+
+        public List<SongDto> GetSongsByUse(DateTime usedDate)
+        {
+           return eccManager.GetSongsByUse(usedDate);
         }
     }
 }
