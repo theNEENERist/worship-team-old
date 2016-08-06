@@ -27,9 +27,19 @@ namespace Server.BusinessObjects
             eccDao.UploadSong(fileName, withExtension, fileType);
         }
 
-        public List<SongDto> GetSongsByUse(DateTime usedDate)
+        public List<Song> GetSongsByUse(DateTime usedDate)
         {
             return eccDao.GetSongsByUse(usedDate);
+        }
+
+        public void SubmitSongsForUse(List<Song> songs)
+        {
+            eccDao.SubmitSongsForUse(songs);
+        }
+
+        public List<Song> GetSongsForNextSunday()
+        {
+            return eccDao.GetSongsForNextSunday();
         }
     }
 }

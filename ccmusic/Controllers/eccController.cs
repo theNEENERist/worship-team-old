@@ -29,9 +29,19 @@ namespace ccmusic.Controllers
             eccManager.UploadSong(fileName, withExtension, fileType);
         }
 
-        public List<SongDto> GetSongsByUse(DateTime usedDate)
+        public List<Song> GetSongsByUse(DateTime usedDate)
         {
            return eccManager.GetSongsByUse(usedDate);
+        }
+
+        public void SubmitSongsForUse(List<Song> songs)
+        {
+            eccManager.SubmitSongsForUse(songs);
+        }
+
+        public List<Song> GetSongsForNextSunday()
+        {
+            return eccManager.GetSongsForNextSunday();
         }
     }
 }

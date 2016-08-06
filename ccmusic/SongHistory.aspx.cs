@@ -19,59 +19,183 @@ namespace ccmusic
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            dateTextBox.Value = DateTime.Now.Date.ToString();
+            txtDate.Value = DateTime.Now.Date.ToString();
             songs = ecc.GetECCFiles();
             var h = songs.Select(x => x.Name);
             songsJson = JsonConvert.SerializeObject(h);
+            GetSongsForSunday();
         }
 
-        protected void AddSongDDL(object sender, EventArgs e)
+        [System.Web.Services.WebMethod]
+        public static void SaveSongs(List<Song> songs)
         {
-            var ID = "songForDate" + ddlList.Count;
-            /*DropDownList ddl = new DropDownList();
-            ddl.CssClass = "songForDate";
-            ddl.DataSource = songs;
-            ddl.DataTextField = "Name";
-            ddl.DataValueField = "Name";
-            ddl.DataBind(); */
-            TextBox txt = new TextBox();
-            txt.ID = ID;
-            txt.CssClass = "songForDate";
-            //somePanelInsideYourForm.Controls.Add(newTextBox);
-
-            //songListContainer.Controls.Add(ddl);
-            ddlList.Add(ID);
-
-            var results = this.Controls.OfType<DropDownList>().Where(c =>
-                Convert.ToString(c.Attributes["class"]).Contains("songForDate"));
-
-            var h = songListContainer.Controls.OfType<DropDownList>().Where(c =>
-                Convert.ToString(c.Attributes["class"]).Contains("songForDate"));
+            eccController ecc1 = new eccController();
+            ecc1.SubmitSongsForUse(songs);
         }
 
-        protected void SubmitSongs(object sender, EventArgs e)
+        protected void GetSongsForSunday()
         {
-            var date = dateTextBox.Value;
-            var songs = new List<SongDto>();
+            eccController ecc1 = new eccController();
+            var songs = ecc1.GetSongsForNextSunday();
 
-            foreach (var ddl in ddlList)
+            nextDate.InnerText = DateTime.Parse(songs.FirstOrDefault().date).Date.ToString("MM/dd/yyyy");
+
+            var worshipSongs = songs.Where(s => s.type == "Worship");
+            var communionSongs = songs.Where(s => s.type == "Communion");
+            var invitationSongs = songs.Where(s => s.type == "Invitation");
+            var closingSongs = songs.Where(s => s.type == "Closing");
+
+            if (worshipSongs.Count() > 0)
             {
-                var control = (DropDownList)FindControl(ddl);
+                foreach (Song song in worshipSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name; 
+                    li.Text = song.name;  
+                    blWorship.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blWorship);
+            }
 
-                songs.Add
-                (
-                    new SongDto()
-                    {
-                        Name = control.SelectedValue
-                        ,DateUsed = date
-                    }
-                );
+            if (communionSongs.Count() > 0)
+            {
+                foreach (Song song in communionSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;  
+                    li.Text = song.name;  
+                    blCommunion.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blCommunion);
+            }
+
+            if (invitationSongs.Count() > 0)
+            {
+                foreach (Song song in invitationSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;  
+                    li.Text = song.name;  
+                    blInvitation.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blInvitation);
+            }
+
+            if (closingSongs.Count() > 0)
+            {
+                foreach (Song song in closingSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name; 
+                    li.Text = song.name;  
+                    blClosing.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blClosing);
             }
         }
 
-        protected void GetSongsByDate(object sender, EventArgs e)
+        private void AddNoSongsLI(BulletedList bl)
         {
-            var songList = ecc.GetSongsByUse(DateTime.Parse(dateTextBox.Value.ToString()));
+            ListItem li = new ListItem();
+            li.Value = "No songs chosen for this section";
+            li.Text = "No songs chosen for this section";
+            li.Attributes.Add("style", "Color: Red");
+            bl.Items.Add(li);
+        }
+
+        protected void GetSongsByUse(object sender, EventArgs e)
+        {
+            var songs = ecc.GetSongsByUse(DateTime.Parse(txtPrevDate.Value.ToString()));
+            prevDate.InnerText = txtPrevDate.Value.ToString();
+
+            var worshipSongs = songs.Where(s => s.type == "Worship");
+            var communionSongs = songs.Where(s => s.type == "Communion");
+            var invitationSongs = songs.Where(s => s.type == "Invitation");
+            var closingSongs = songs.Where(s => s.type == "Closing");
+
+            blPrevWorship.Items.Clear();
+            blPrevCommunion.Items.Clear();
+            blPrevInvitation.Items.Clear();
+            blPrevClosing.Items.Clear();
+
+            if (worshipSongs.Count() > 0)
+            {
+                foreach (Song song in worshipSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;
+                    li.Text = song.name;
+                    blPrevWorship.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blPrevWorship);
+            }
+
+            if (communionSongs.Count() > 0)
+            {
+                foreach (Song song in communionSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;
+                    li.Text = song.name;
+                    blPrevCommunion.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blPrevCommunion);
+            }
+
+            if (invitationSongs.Count() > 0)
+            {
+                foreach (Song song in invitationSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;
+                    li.Text = song.name;
+                    blPrevInvitation.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blPrevInvitation);
+            }
+
+            if (closingSongs.Count() > 0)
+            {
+                foreach (Song song in closingSongs)
+                {
+                    ListItem li = new ListItem();
+                    li.Value = song.name;
+                    li.Text = song.name;
+                    blPrevClosing.Items.Add(li);
+                }
+            }
+            else
+            {
+                AddNoSongsLI(blPrevClosing);
+            }
+
+            prevInner.Attributes.Add("style", "display:block");
+        }
+        
+        /*protected void GetSongsByDate(object sender, EventArgs e)
+        {
+            var songList = ecc.GetSongsByUse(DateTime.Parse(txtDate.Value.ToString()));
 
             foreach (SongDto song in songList)
             {
@@ -82,6 +206,6 @@ namespace ccmusic
                 createDiv.InnerHtml = "<a href='SongDetails?Name=" + song.Name + "' class='noLink' runat='server' onClick='LinkOnClick'><div class='songList'><h3>" + song.Name + "</h3></div></a>";
                 songListContainer.Controls.Add(createDiv);
             }
-        }
+        }*/
     }
 }

@@ -111,9 +111,9 @@ namespace Server.DataAccessLayer
             }
         }
 
-        public List<SongDto> GetSongsByUse(DateTime usedDate)
+        public List<Song> GetSongsByUse(DateTime usedDate)
         {
-            var songList = new List<SongDto>();
+            var songList = new List<Song>();
             try
             {
                 using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
@@ -123,7 +123,7 @@ namespace Server.DataAccessLayer
                     DataSet ds = new DataSet();
                     SqlCommand sqlComm = new SqlCommand("GetSongsByDate", con);
                     sqlComm.CommandType = CommandType.StoredProcedure;
-                    sqlComm.Parameters.AddWithValue("@LastUsedDate", usedDate.ToShortDateString());
+                    sqlComm.Parameters.AddWithValue("@UsedDate", usedDate.ToShortDateString());
 
                     SqlDataAdapter da = new SqlDataAdapter();
                     da.SelectCommand = sqlComm;
@@ -132,10 +132,78 @@ namespace Server.DataAccessLayer
 
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
-                        songList.Add(new SongDto()
+                        songList.Add(new Song()
                         {
-                            Name = dr["SongName"].ToString(),
-                            DateUsed = dr["DateUsed"].ToString()
+                            name = dr["SongName"].ToString(),
+                            type = dr["SongType"].ToString(),
+                            order = dr["SongOrder"].ToString(),
+                            date = dr["DateUsed"].ToString()
+                        });
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return songList;
+        }
+
+        public void SubmitSongsForUse(List<Song> songs)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
+                {
+                    con.Open();
+
+                    foreach(Song song in songs)
+                    {
+                        DataSet ds = new DataSet();
+                        SqlCommand sqlComm = new SqlCommand("InsertIntoSongsByUse", con);
+                        sqlComm.CommandType = CommandType.StoredProcedure;
+                        sqlComm.Parameters.AddWithValue("@Name", song.name);
+                        sqlComm.Parameters.AddWithValue("@Type", song.type);
+                        sqlComm.Parameters.AddWithValue("@Order", song.order);
+                        sqlComm.Parameters.AddWithValue("@Date", song.date);
+
+                        sqlComm.ExecuteNonQuery();
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public List<Song> GetSongsForNextSunday()
+        {
+            var songList = new List<Song>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
+                {
+                    con.Open();
+
+                    DataSet ds = new DataSet();
+                    SqlCommand sqlComm = new SqlCommand("GetSongsForNextSunday", con);
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = sqlComm;
+
+                    da.Fill(ds);
+
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        songList.Add(new Song()
+                        {
+                            name = dr["SongName"].ToString(),
+                            type = dr["SongType"].ToString(),
+                            order = dr["SongOrder"].ToString(),
+                            date = dr["DateUsed"].ToString()
                         });
                     }
 
