@@ -39,9 +39,9 @@ namespace ccmusic.Controllers
             eccManager.SubmitSongsForUse(songs);
         }
 
-        public List<Song> GetSongsForNextSunday()
+        public List<Song> GetSongsForNextSunday(string sunday)
         {
-            return eccManager.GetSongsForNextSunday();
+            return eccManager.GetSongsForNextSunday(sunday);
         }
     }
 }

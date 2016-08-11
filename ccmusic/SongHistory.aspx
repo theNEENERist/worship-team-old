@@ -75,7 +75,8 @@
                                 <ContentTemplate>
                                     <asp:Button runat="server" OnClientClick="ShowPrevInnerPanel();" OnClick="GetSongsByUse" Text="Get Songs for Date" />
 
-                                    <div id="prevInner" style="padding-left: 10px; display:none;" runat="server">
+                                    <div id="prevInner" style="display:none;" runat="server">
+                                        <div style="padding-left: 10px; width:35%;">
                                         <h4>Songs for <span id="prevDate" runat="server"></span></h4>
                                         <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Worship">
                                             <asp:BulletedList runat="server" ID="blPrevWorship"/>
@@ -89,6 +90,7 @@
                                         <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Closing">
                                             <asp:BulletedList runat="server" ID="blPrevClosing"/>
                                         </asp:Panel>
+                                            </div>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -102,23 +104,31 @@
         </div>
     </div>
     <div class="upcomingSongs" style="width:20%; float:left; border: 1px solid; border-radius: 20px;">
-        <div class="upcomingInner" style="padding-left: 10px;">
-            <h4>Songs for Next Week (<span runat="server" id="nextDate"></span>):</h4>
-            <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Worship">
-                <asp:BulletedList runat="server" ID="blWorship"/>
-            </asp:Panel>
-            <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Communion">
-                <asp:BulletedList runat="server" ID="blCommunion"/>
-            </asp:Panel>
-            <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Invitation">
-                <asp:BulletedList runat="server" ID="blInvitation"/>
-            </asp:Panel>
-            <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Closing">
-                <asp:BulletedList runat="server" ID="blClosing"/>
-            </asp:Panel>
-        </div>
+        <asp:UpdatePanel runat="server" ID="upUpcoming">
+            <Triggers>
+                <asp:AsyncPostBackTrigger controlid="btnUpcoming" eventname="Click" />
+            </Triggers>
+            <ContentTemplate>
+                <div class="upcomingInner" style="padding-left: 10px;">
+                    <h4>Songs for Next Week (<span runat="server" id="nextDate"></span>):</h4>
+                    <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Worship">
+                        <asp:BulletedList runat="server" ID="blWorship"/>
+                    </asp:Panel>
+                    <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Communion">
+                        <asp:BulletedList runat="server" ID="blCommunion"/>
+                    </asp:Panel>
+                    <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Invitation">
+                        <asp:BulletedList runat="server" ID="blInvitation"/>
+                    </asp:Panel>
+                    <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Closing">
+                        <asp:BulletedList runat="server" ID="blClosing"/>
+                    </asp:Panel>
+                    <asp:Button runat="server" ID="btnUpcoming" OnClick="UpdateUpcoming" style="display:none"/>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
-
+       
     <script type="text/javascript">
         var songs = $.parseJSON('<%= songsJson %>');
 
@@ -131,7 +141,7 @@
         });
 
        function AddSongTxt() {
-           var newItem = $("<div style='margin-top: 5px' class='songDiv'><div style='width:300px;'><hr/></div><span>Song Name: </span><input class='songsUsed' type='text'><br /><div style='padding-top:5px'><select class='songType'><option value='-1'>Song Type</option><option value='Worship'>Worship</option>                                <option value='Communion'>Communion</option><option value='Invitation'>Invitation</option><option value='Closing'>Closing</option></select></div><div style='padding-top:5px: 5px;'><select class='songOrder'><option value='-1'>Order</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option<option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option></select></div></div>");
+           var newItem = $("<div style='margin-top: 5px' class='songDiv'><div style='width:300px;'><hr/></div><span>Song Name: </span><input class='songsUsed' type='text'><br /><div style='padding-top:5px'><select class='songType'><option value='-1'>Song Type</option><option value='Worship'>Worship</option>                                <option value='Communion'>Communion</option><option value='Invitation'>Invitation</option><option value='Closing'>Closing</option></select></div><div style='padding-top:10px;'><select class='songOrder'><option value='-1'>Order</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option<option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option></select></div></div>");
 
            $('.songTxts').append(newItem);
 
@@ -232,13 +242,6 @@
                songs.push(song);
            });
 
-           /*$('.songsUsed').each(function () {
-               var song = new Object();
-               song.name = $(this).val()
-               song.date = date.val()
-               songs.push(song);
-           });*/
-           
            songs = JSON.stringify({
                'songs': songs
            })
@@ -250,8 +253,9 @@
                data: songs,
                success: function (msg) {
                    $('#success').show();
+                   $('#<%=btnUpcoming.ClientID%>').click();
                },
-               error: function (msg) { }//handle error here }
+               error: function (msg) { }
            });
        }
         /*var nowTemp = new Date();

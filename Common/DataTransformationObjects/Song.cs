@@ -14,6 +14,7 @@ namespace Common.DataTransformationObjects
         public string type
         { get; set; }
 
+
         public string order
         { get; set; }
 

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Common.DataTransformationObjects;
+using Common;
 
 namespace ccmusic
 {
@@ -15,7 +16,16 @@ namespace ccmusic
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var songList = ecc.GetECCFiles();
+            var songList = CacheLayer.Get<List<SongDto>>("songs");
+
+            CacheLayer.Remove("songs");
+
+            if (songList == null)
+            {
+                songList = ecc.GetECCFiles();
+
+                CacheLayer.Add(songList, "songs");
+            }
 
             foreach (SongDto song in songList)
             {

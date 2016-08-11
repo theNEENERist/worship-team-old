@@ -94,6 +94,15 @@ namespace ccmusic {
         protected global::System.Web.UI.WebControls.BulletedList blPrevClosing;
         
         /// <summary>
+        /// upUpcoming control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upUpcoming;
+        
+        /// <summary>
         /// nextDate control.
         /// </summary>
         /// <remarks>
@@ -137,5 +146,14 @@ namespace ccmusic {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.BulletedList blClosing;
+        
+        /// <summary>
+        /// btnUpcoming control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpcoming;
     }
 }

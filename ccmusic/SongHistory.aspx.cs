@@ -35,15 +35,32 @@ namespace ccmusic
 
         protected void GetSongsForSunday()
         {
-            eccController ecc1 = new eccController();
-            var songs = ecc1.GetSongsForNextSunday();
+            var sunday = ((int)DayOfWeek.Sunday- (int)DateTime.Today.DayOfWeek + 7) % 7;
+            DateTime nextSunday = DateTime.Today.AddDays(sunday);
 
-            nextDate.InnerText = DateTime.Parse(songs.FirstOrDefault().date).Date.ToString("MM/dd/yyyy");
+            eccController ecc1 = new eccController();
+            var songs = ecc1.GetSongsForNextSunday(nextSunday.ToString("MM/dd/yyyy"));
+
+            nextDate.InnerText = nextSunday.ToString("MM/dd/yyyy");
 
             var worshipSongs = songs.Where(s => s.type == "Worship");
             var communionSongs = songs.Where(s => s.type == "Communion");
             var invitationSongs = songs.Where(s => s.type == "Invitation");
             var closingSongs = songs.Where(s => s.type == "Closing");
+
+            if(worshipSongs.Count() > 0)
+                blWorship.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (communionSongs.Count() > 0)
+                blCommunion.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (invitationSongs.Count() > 0)
+                blInvitation.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (closingSongs.Count() > 0)
+                blClosing.DisplayMode = BulletedListDisplayMode.HyperLink;
+
+            blWorship.Items.Clear();
+            blCommunion.Items.Clear();
+            blInvitation.Items.Clear();
+            blClosing.Items.Clear();
 
             if (worshipSongs.Count() > 0)
             {
@@ -115,6 +132,12 @@ namespace ccmusic
             bl.Items.Add(li);
         }
 
+        protected void UpdateUpcoming(object sender, EventArgs e)
+        {
+            GetSongsForSunday();
+            
+        }
+
         protected void GetSongsByUse(object sender, EventArgs e)
         {
             var songs = ecc.GetSongsByUse(DateTime.Parse(txtPrevDate.Value.ToString()));
@@ -124,6 +147,15 @@ namespace ccmusic
             var communionSongs = songs.Where(s => s.type == "Communion");
             var invitationSongs = songs.Where(s => s.type == "Invitation");
             var closingSongs = songs.Where(s => s.type == "Closing");
+
+            if (worshipSongs.Count() > 0)
+                blPrevWorship.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (communionSongs.Count() > 0)
+                blPrevCommunion.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (invitationSongs.Count() > 0)
+                blPrevInvitation.DisplayMode = BulletedListDisplayMode.HyperLink;
+            if (closingSongs.Count() > 0)
+                blPrevClosing.DisplayMode = BulletedListDisplayMode.HyperLink;
 
             blPrevWorship.Items.Clear();
             blPrevCommunion.Items.Clear();
@@ -135,7 +167,7 @@ namespace ccmusic
                 foreach (Song song in worshipSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;
+                    li.Value = "/SongDetails?Name="+song.name;
                     li.Text = song.name;
                     blPrevWorship.Items.Add(li);
                 }

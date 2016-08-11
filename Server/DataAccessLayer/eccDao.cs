@@ -35,7 +35,11 @@ namespace Server.DataAccessLayer
 
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
-                        songList.Add(new SongDto { Name = dr["FileName"].ToString() });
+                        songList.Add(new SongDto
+                        {
+                            Name = dr["FileName"].ToString(),
+                            DateUsed = dr["DateUsed"].ToString()
+                        });
                     }
                 }
             }
@@ -71,8 +75,9 @@ namespace Server.DataAccessLayer
                         songList.Add(new SongDto()
                         {
                             Name = dr["FileName"].ToString(),
+                            FileType = dr["FileType"].ToString(),
                             Path = dr["FilePath"].ToString(),
-                            FileType = dr["FileType"].ToString()
+                            DateUsed = dr["DateUsed"].ToString()
                         });
                     }
                 }
@@ -178,7 +183,7 @@ namespace Server.DataAccessLayer
             }
         }
 
-        public List<Song> GetSongsForNextSunday()
+        public List<Song> GetSongsForNextSunday(string sunday)
         {
             var songList = new List<Song>();
             try
@@ -189,6 +194,7 @@ namespace Server.DataAccessLayer
 
                     DataSet ds = new DataSet();
                     SqlCommand sqlComm = new SqlCommand("GetSongsForNextSunday", con);
+                    sqlComm.Parameters.AddWithValue("@sunday",sunday);
                     sqlComm.CommandType = CommandType.StoredProcedure;
 
                     SqlDataAdapter da = new SqlDataAdapter();

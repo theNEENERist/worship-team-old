@@ -37,9 +37,9 @@ namespace Server.BusinessObjects
             eccDao.SubmitSongsForUse(songs);
         }
 
-        public List<Song> GetSongsForNextSunday()
+        public List<Song> GetSongsForNextSunday(string sunday)
         {
-            return eccDao.GetSongsForNextSunday();
+            return eccDao.GetSongsForNextSunday(sunday);
         }
     }
 }

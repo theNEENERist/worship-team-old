@@ -24,6 +24,11 @@ namespace ccmusic
             Page.Title = name + " : Music Sheets";
             List<SongDto> songFiles = ecc.GetEccFilesForSong(name);
 
+            if (!songFiles.FirstOrDefault().DateUsed.Equals(null) && !songFiles.FirstOrDefault().DateUsed.Equals(""))
+                lastUsed.Text = DateTime.Parse(songFiles.FirstOrDefault().DateUsed).ToString("MM/dd/yyyy");
+            else
+                lastUsed.Text = "Never!";
+
             foreach (SongDto song in songFiles.Where(x => x.FileType == "1"))
             {
                 System.Web.UI.HtmlControls.HtmlGenericControl createDiv = new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
