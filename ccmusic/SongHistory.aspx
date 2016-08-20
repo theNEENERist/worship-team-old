@@ -5,7 +5,7 @@
         <h1>CCWorship</h1>
         <p class="lead"></p>
     </div>
-    <div style="margin-bottom: 5px; width: 80%; float:left">
+    <div class="wouldYouOuter">
         <div id="wouldYou">
             <h1>Would you rather:</h1>
             <input type="button" id="btnAddSongs" value="Add New Songs" />
@@ -75,8 +75,8 @@
                                 <ContentTemplate>
                                     <asp:Button runat="server" OnClientClick="ShowPrevInnerPanel();" OnClick="GetSongsByUse" Text="Get Songs for Date" />
 
-                                    <div id="prevInner" style="display:none;" runat="server">
-                                        <div style="padding-left: 10px; width:35%;">
+                                    <div id="prevInner" class="previous" runat="server">
+                                        <div>
                                         <h4>Songs for <span id="prevDate" runat="server"></span></h4>
                                         <asp:Panel runat="server" CssClass="pnlUpcomingMusic" GroupingText="Worship">
                                             <asp:BulletedList runat="server" ID="blPrevWorship"/>
@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div class="upcomingSongs" style="width:20%; float:left; border: 1px solid; border-radius: 20px;">
+    <div class="upcomingSongs">
         <asp:UpdatePanel runat="server" ID="upUpcoming">
             <Triggers>
                 <asp:AsyncPostBackTrigger controlid="btnUpcoming" eventname="Click" />

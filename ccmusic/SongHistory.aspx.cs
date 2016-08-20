@@ -67,7 +67,7 @@ namespace ccmusic
                 foreach (Song song in worshipSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name; 
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;  
                     blWorship.Items.Add(li);
                 }
@@ -82,7 +82,7 @@ namespace ccmusic
                 foreach (Song song in communionSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;  
+                    li.Value = "/SongDetails?Name=" + song.name; ;  
                     li.Text = song.name;  
                     blCommunion.Items.Add(li);
                 }
@@ -97,7 +97,7 @@ namespace ccmusic
                 foreach (Song song in invitationSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;  
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;  
                     blInvitation.Items.Add(li);
                 }
@@ -112,7 +112,7 @@ namespace ccmusic
                 foreach (Song song in closingSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name; 
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;  
                     blClosing.Items.Add(li);
                 }
@@ -167,7 +167,7 @@ namespace ccmusic
                 foreach (Song song in worshipSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = "/SongDetails?Name="+song.name;
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;
                     blPrevWorship.Items.Add(li);
                 }
@@ -182,7 +182,7 @@ namespace ccmusic
                 foreach (Song song in communionSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;
                     blPrevCommunion.Items.Add(li);
                 }
@@ -197,7 +197,7 @@ namespace ccmusic
                 foreach (Song song in invitationSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;
                     blPrevInvitation.Items.Add(li);
                 }
@@ -212,7 +212,7 @@ namespace ccmusic
                 foreach (Song song in closingSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = song.name;
+                    li.Value = "/SongDetails?Name=" + song.name;
                     li.Text = song.name;
                     blPrevClosing.Items.Add(li);
                 }

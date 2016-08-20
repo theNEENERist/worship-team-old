@@ -98,6 +98,11 @@ select {
     font-size: 16px;
 }
 
+input[type=button], input[type=submit]{
+    border-radius: 5px;
+    border-style: outset;
+}
+
 .songListOutter 
 {
     margin-top: 5px;
@@ -156,8 +161,44 @@ hr {
     margin-bottom: 5px;
 }
 
+.wouldYouOuter 
+{
+    margin-bottom: 5px;
+    width: 80%;
+    float: left;
+}
+
+.upcomingSongs 
+{
+    width: 20%;
+    float: left;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.previous
+{
+    display: none;
+    padding-left: 10px;
+    width: 35%;
+}
+
 @media screen and (max-width: 768px) {
     .songList {
         height: auto;
+    }
+
+    .upcomingSongs, .previousSongs, .wouldYouOuter {
+        float: none;
+        width: auto;
+    }
+    
+    .upcomingSongs {
+        margin-top: 45px;
+    }
+    
+    .previous 
+    {
+        width: auto;
     }
 }

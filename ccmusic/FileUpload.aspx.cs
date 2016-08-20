@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using ccmusic.Controllers;
+using Common;
 
 namespace ccmusic
 {
@@ -26,6 +22,8 @@ namespace ccmusic
                     upload.SaveAs(Server.MapPath("MusicSheets/Lyrics/" + upload.FileName));
 
                 ecc.UploadSong(fileName.Text, upload.FileName, songType.SelectedValue);
+
+                CacheLayer.Remove("songs");
             }
         }
     }

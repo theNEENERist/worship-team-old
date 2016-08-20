@@ -12,8 +12,8 @@
         }
     </script>
     <div class="jumbotron">
-        <h1>CCWorship</h1>
-        <p class="lead"><asp:label runat="server" id="songTitle"/></p>
+        <h1><asp:label runat="server" id="songTitle"/></h1>
+        <p class="lead">Last used: <asp:label runat="server" id="lastUsed"/></p>
     </div>
 
     <div id="songFileList" runat="server">
