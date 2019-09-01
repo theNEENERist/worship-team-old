@@ -43,5 +43,15 @@ namespace ccmusic.Controllers
         {
             return eccManager.GetSongsForNextSunday(sunday);
         }
+
+        public void SaveTeam(List<TeamMember> members)
+        {
+            eccManager.SaveTeam(members);
+        }
+
+        public List<TeamMember> GetWorshipTeam(string date)
+        {
+            return eccManager.GetWorshipTeam(date);
+        }
     }
 }

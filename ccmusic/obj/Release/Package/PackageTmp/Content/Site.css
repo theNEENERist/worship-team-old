@@ -168,7 +168,7 @@ hr {
     float: left;
 }
 
-.upcomingSongs 
+.upcomingSongs, .currTeam
 {
     width: 20%;
     float: left;
@@ -188,12 +188,12 @@ hr {
         height: auto;
     }
 
-    .upcomingSongs, .previousSongs, .wouldYouOuter {
+    .upcomingSongs, .previousSongs, .wouldYouOuter, .currTeam, .previousTeam {
         float: none;
         width: auto;
     }
     
-    .upcomingSongs {
+    .upcomingSongs, .currTeam {
         margin-top: 45px;
     }
     

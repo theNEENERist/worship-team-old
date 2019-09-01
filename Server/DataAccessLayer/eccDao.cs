@@ -221,5 +221,73 @@ namespace Server.DataAccessLayer
             }
             return songList;
         }
+
+        public void SaveTeam(List<TeamMember> members)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
+                {
+                    con.Open();
+
+                    foreach (TeamMember member in members)
+                    {
+                        DataSet ds = new DataSet();
+                        SqlCommand sqlComm = new SqlCommand("InsertWorshipTeam", con);
+                        sqlComm.CommandType = CommandType.StoredProcedure;
+                        sqlComm.Parameters.AddWithValue("@Member", member.Name);
+                        sqlComm.Parameters.AddWithValue("@Month", DateTime.Parse(member.Month).ToString("MM"));
+                        sqlComm.Parameters.AddWithValue("@Year", DateTime.Parse(member.Month).ToString("yyyy"));
+                        sqlComm.Parameters.AddWithValue("@Role", member.Role);
+
+                        sqlComm.ExecuteNonQuery();
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public List<TeamMember> GetWorshipTeam(string date)
+        {
+            var members = new List<TeamMember>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ccmusicconn"].ConnectionString))
+                {
+                    con.Open();
+
+                    DataSet ds = new DataSet();
+                    SqlCommand sqlComm = new SqlCommand("GetWorshipTeam", con);
+                    sqlComm.Parameters.AddWithValue("@Month", DateTime.Parse(date).ToString("MM"));
+                    sqlComm.Parameters.AddWithValue("@Year", DateTime.Parse(date).ToString("yyyy"));
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = sqlComm;
+
+                    da.Fill(ds);
+
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        members.Add(new TeamMember()
+                        {
+                            Name = dr["MemberName"].ToString(),
+                            Month = dr["Month"].ToString(),
+                            Role = dr["Role"].ToString(),
+                        });
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return members;
+        }
     }
 }

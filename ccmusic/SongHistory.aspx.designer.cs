@@ -94,6 +94,15 @@ namespace ccmusic {
         protected global::System.Web.UI.WebControls.BulletedList blPrevClosing;
         
         /// <summary>
+        /// btnModify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModify;
+        
+        /// <summary>
         /// upUpcoming control.
         /// </summary>
         /// <remarks>

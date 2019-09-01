@@ -45,6 +45,7 @@
     <Compile Include="CacheLayer.cs" />
     <Compile Include="DataTransformationObjects\Song.cs" />
     <Compile Include="DataTransformationObjects\SongDto.cs" />
+    <Compile Include="DataTransformationObjects\TeamMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

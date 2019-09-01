@@ -82,8 +82,8 @@ namespace ccmusic
                 foreach (Song song in communionSongs)
                 {
                     ListItem li = new ListItem();
-                    li.Value = "/SongDetails?Name=" + song.name; ;  
-                    li.Text = song.name;  
+                    li.Value = "/SongDetails?Name=" + song.name;
+                    li.Text = song.name;
                     blCommunion.Items.Add(li);
                 }
             }
@@ -224,7 +224,12 @@ namespace ccmusic
 
             prevInner.Attributes.Add("style", "display:block");
         }
-        
+
+        protected void btnModify_Click(Object sender, EventArgs e)
+        {
+            Server.Transfer("ModifySongs.aspx");
+        }
+
         /*protected void GetSongsByDate(object sender, EventArgs e)
         {
             var songList = ecc.GetSongsByUse(DateTime.Parse(txtDate.Value.ToString()));

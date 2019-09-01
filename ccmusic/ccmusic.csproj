@@ -502,9 +502,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\ecc_aboveall.pdf" />
-    <Content Include="Content\ecc_beautifulone.pdf" />
-    <Content Include="Content\ecc_itiswell.pdf" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker3.min.css.map" />
@@ -514,6 +511,7 @@
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Properties\PublishProfiles\ccmusics.net - Web Deploy.pubxml" />
+    <Content Include="ModifySongs.aspx" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -624,6 +622,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="SongDetails.aspx" />
+    <Content Include="WorshipTeam.aspx" />
     <Content Include="SongHistory.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -786,6 +785,13 @@
     </Compile>
     <Compile Include="Models\eccModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ModifySongs.aspx.cs">
+      <DependentUpon>ModifySongs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModifySongs.aspx.designer.cs">
+      <DependentUpon>ModifySongs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
@@ -807,6 +813,13 @@
     </Compile>
     <Compile Include="SongDetails.aspx.designer.cs">
       <DependentUpon>SongDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorshipTeam.aspx.cs">
+      <DependentUpon>WorshipTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorshipTeam.aspx.designer.cs">
+      <DependentUpon>WorshipTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="SongHistory.aspx.cs">
       <DependentUpon>SongHistory.aspx</DependentUpon>

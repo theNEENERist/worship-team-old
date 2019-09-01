@@ -94,8 +94,13 @@
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            <div class="back" style="padding-top: 15px;">
-                                <input type="button" id="btnPrevBack" value="&lArr; Back" />
+                            <div class="bottomNav" style="padding-top:15px">
+                                <div class="back" style="padding-top: 15px; display:inline;">
+                                    <input type="button" id="btnPrevBack" value="&lArr; Back" />
+                                </div>
+                                <div class="modify" style="display: inline">
+                                    <asp:Button runat="server" ID="btnModify" Text="Modify List" OnClick="btnModify_Click" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -220,6 +225,12 @@
            $('#success').hide();
        });
 
+       $('.songsUsed').focusout(function () {
+           if ($.inArray($(this).val(), songs) == -1 && $(this).val() != '') {
+               alert("This song is not currently uploaded to the website.  Are you sure you want to use this song?")
+           }
+       });
+
        $('.songType, .songOrder').change(function () {
            if($(this).val() !== -1)
                $(this).css({
@@ -258,30 +269,9 @@
                error: function (msg) { }
            });
        }
-        /*var nowTemp = new Date();
-        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
-        var checkin = $('#dpd1').datepicker({
-            onRender: function (date) {
-                return date.valueOf() < now.valueOf() ? 'disabled' : '';
-            }
-        }).on('changeDate', function (ev) {
-            if (ev.date.valueOf() > checkout.date.valueOf()) {
-                var newDate = new Date(ev.date)
-                newDate.setDate(newDate.getDate() + 1);
-                checkout.setValue(newDate);
-            }
-            checkin.hide();
-            $('#dpd2')[0].focus();
-        }).data('datepicker');
-        var checkout = $('#dpd2').datepicker({
-            onRender: function (date) {
-                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-            }
-        }).on('changeDate', function (ev) {
-            checkout.hide();
-        }).data('datepicker');*/
-
+        /************************************************
+            Datepicker
+        ************************************************/
          $(document).ready(function () {
             var dp = $('#<%=txtDate.ClientID%>');
             dp.datepicker({

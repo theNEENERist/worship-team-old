@@ -41,5 +41,15 @@ namespace Server.BusinessObjects
         {
             return eccDao.GetSongsForNextSunday(sunday);
         }
+
+        public void SaveTeam(List<TeamMember> members)
+        {
+            eccDao.SaveTeam(members);
+        }
+
+        public List<TeamMember> GetWorshipTeam(string date)
+        {
+            return eccDao.GetWorshipTeam(date);
+        }
     }
 }
